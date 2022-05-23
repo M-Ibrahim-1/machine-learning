@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from Random_forest import RandomForest
 from PyQt5.QtWidgets import QMessageBox
-import time
+
 
 class Ui_MainWindow(QtWidgets.QWidget):
 
@@ -22,6 +22,14 @@ class Ui_MainWindow(QtWidgets.QWidget):
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.select_model = QtWidgets.QComboBox(self.centralwidget)
+        self.select_model.setGeometry(QtCore.QRect(80, 30, 251, 71))
+        self.select_model.setObjectName("select_model")
+        self.select_model.addItem("Linear Regression")
+        self.select_model.addItem("Polynomial Regression")
+        self.select_model.addItem("Random Forest")
+
+
 
 
     def retranslateUi(self, MainWindow):
@@ -52,14 +60,16 @@ class Ui_MainWindow(QtWidgets.QWidget):
                 and 0 <= depth <= 4 and width in (1, 2, 3):
             # Showing confirmation message along
             # with information provided by user.
-            result = RandomForest.predict(position, velocity, angle, depth,
-                                          width)
-            print(result)
-            self.pop_resultant_force(result)
-            self.proceed.setText("Predict another set of Parameter")
-            self.proceed.adjustSize()
+            if self.select_model.currentText() == "Random Forest":
+                result = RandomForest.predict(position, velocity, angle, depth,
+                                              width)
+                print(result)
+                self.pop_resultant_force(result)
+                self.proceed.setText("Predict another set of Parameter")
+                self.proceed.adjustSize()
+            if self.select_model.currentText() == "Linear Regression":
+                pass
 
-            return position, velocity, angle, depth, width
 
         else:
             self.pop_err_parameter()

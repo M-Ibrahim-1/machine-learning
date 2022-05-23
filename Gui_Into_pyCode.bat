@@ -1,0 +1,1 @@
+C:\Users\imoha\AppData\Local\Programs\Python\Python39\Scripts\pyuic5.exe -x test.ui -o compo.py
