@@ -8,22 +8,20 @@ class Ui_MainWindow(QtWidgets.QWidget):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(500, 500)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
-
+        #Button Proceed
         self.proceed = QtWidgets.QPushButton(self.centralwidget)
-        self.proceed.setGeometry(QtCore.QRect(160, 150, 93, 28))
+        self.proceed.setGeometry(QtCore.QRect(200, 300, 93, 28))
 
         # For displaying confirmation message along with user's info.
-        self.result_label = QtWidgets.QLabel(self.centralwidget)
-        self.result_label.setGeometry(QtCore.QRect(170, 40, 201, 111))
         # Keeping the text of label empty initially.
-        self.result_label.setText("")
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        #Drop list to select Meta Model
         self.select_model = QtWidgets.QComboBox(self.centralwidget)
-        self.select_model.setGeometry(QtCore.QRect(80, 30, 251, 71))
+        self.select_model.setGeometry(QtCore.QRect(200, 250, 200, 25))
         self.select_model.setObjectName("select_model")
         self.select_model.addItem("Linear Regression")
         self.select_model.addItem("Polynomial Regression")
@@ -67,7 +65,8 @@ class Ui_MainWindow(QtWidgets.QWidget):
                 self.pop_resultant_force(result)
                 self.proceed.setText("Predict another set of Parameter")
                 self.proceed.adjustSize()
-            if self.select_model.currentText() == "Linear Regression":
+
+            elif self.select_model.currentText() == "Linear Regression":
                 pass
 
 
@@ -78,7 +77,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
     def pop_resultant_force(self, result):
         msg = QMessageBox()
         msg.setWindowTitle("Result")
-        msg.setText(f'resultant force = {result}')
+        msg.setText(f'resultant force = {result} N')
         msg.setIcon(QMessageBox.Information)
         x = msg.exec_()
 
