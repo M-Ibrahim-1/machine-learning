@@ -2,7 +2,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from Random_forest import RandomForest
 from PyQt5.QtWidgets import QMessageBox
+from linear_regression_model import SimpleLinearRegression
+from ann import ANN
 
+def print_parameter(position, velocity, angle, depth, width):
+    print(f"position = {position}\n"
+          f"velocity = {velocity}\n"
+          f"angle= {angle}\n"
+          f"depth= {depth}\n"
+          f"width= {width}")
 
 class Ui_MainWindow(QtWidgets.QWidget):
 
@@ -26,6 +34,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.select_model.addItem("Linear Regression")
         self.select_model.addItem("Polynomial Regression")
         self.select_model.addItem("Random Forest")
+        self.select_model.addItem("ANN")
 
 
 
@@ -61,13 +70,39 @@ class Ui_MainWindow(QtWidgets.QWidget):
             if self.select_model.currentText() == "Random Forest":
                 result = RandomForest.predict(position, velocity, angle, depth,
                                               width)
+                print_parameter(position, velocity, angle, depth, width)
+                print("random forest")
                 print(result)
                 self.pop_resultant_force(result)
                 self.proceed.setText("Predict another set of Parameter")
                 self.proceed.adjustSize()
 
             elif self.select_model.currentText() == "Linear Regression":
-                pass
+                result = SimpleLinearRegression.predict(position,
+                                                        velocity,
+                                                        angle,
+                                                        depth,
+                                                        width)
+                print_parameter(position, velocity, angle, depth, width)
+                print("model = linear regression")
+                print(result)
+                self.pop_resultant_force(result)
+                self.proceed.setText("Predict another set of Parameter")
+                self.proceed.adjustSize()
+
+            elif self.select_model.currentText() == "ANN":
+                result = ANN.predict(position,
+                                     velocity,
+                                     angle,
+                                     depth,
+                                     width,
+                                     )
+                print_parameter(position, velocity, angle, depth, width)
+                print("model = ANN")
+                print(result)
+                self.pop_resultant_force(result)
+                self.proceed.setText("Predict another set of Parameter")
+                self.proceed.adjustSize()
 
 
         else:
