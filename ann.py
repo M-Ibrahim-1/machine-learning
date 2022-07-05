@@ -9,9 +9,8 @@ from sklearn.model_selection import train_test_split
 import sklearn.utils
 import sklearn.metrics as sm
 from tensorflow.keras.models import Sequential, model_from_json
-
+#
 class ANN():
-
     @staticmethod
     def train():
         # Loading Dataset
@@ -28,7 +27,6 @@ class ANN():
         # Splitting dataset into training and testing dataset
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,
                                                             random_state=0)
-
         # Performing Feature Scaling
         Y_train = Y_train.reshape(-1, 1)
         Y_test = Y_test.reshape(-1, 1)
@@ -42,7 +40,6 @@ class ANN():
         X_test = X_scaler.transform(X_test)
         #Initialising ANN
         ann = tf.keras.models.Sequential()
-
         #Adding Layers
         #Adding Input Layer
         ann.add(tf.keras.layers.Dense(units=5,activation="relu"))
@@ -52,13 +49,10 @@ class ANN():
         ann.add(tf.keras.layers.Dense(units=20,activation="relu"))
         #Adding Output Layer
         ann.add(tf.keras.layers.Dense(units=1, activation="linear"))
-
         #Compiling ANN
         ann.compile(optimizer="adam",loss="mean_squared_error")
-
         #Fitting ANN
         ann.fit(X_train,Y_train,batch_size=32,epochs = 100)
-
         #Saving created neural network as .h5
         ann.save("ANN.h5")
         #Saving created neural network as json
@@ -68,8 +62,6 @@ class ANN():
         #Saving weights to HDF5
         ann.save_weights("ann.h5")
         print("Saved model to disk")
-
-
         #Evaluating Model
         Y_pred = ann.predict(X_test)
         Y_test = Y_scaler.inverse_transform(Y_test)
@@ -98,11 +90,9 @@ class ANN():
         # Generating Matrix of Features (X) and Dependent Variable Vectors (Y)
         X = data.iloc[:, 0:-1].values
         Y = data.iloc[:, -1].values
-
         # Splitting dataset into training and testing dataset
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2,
                                                             random_state=0)
-
         # Performing Feature Scaling
         Y_train = Y_train.reshape(-1, 1)
         X_scaler = sklearn.preprocessing.MinMaxScaler()
