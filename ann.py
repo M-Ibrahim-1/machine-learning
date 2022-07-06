@@ -1,4 +1,5 @@
 #Importing necessary Libraries
+
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -9,7 +10,8 @@ from sklearn.model_selection import train_test_split
 import sklearn.utils
 import sklearn.metrics as sm
 from tensorflow.keras.models import Sequential, model_from_json
-#
+
+
 class ANN():
     @staticmethod
     def train():
@@ -57,10 +59,10 @@ class ANN():
         ann.save("ANN.h5")
         #Saving created neural network as json
         ann_json = ann.to_json()
-        with open("ann.json", "w") as json_file:
+        with open("models/ann.json", "w") as json_file:
             json_file.write(ann_json)
         #Saving weights to HDF5
-        ann.save_weights("ann.h5")
+        ann.save_weights("ANN.h5")
         print("Saved model to disk")
         #Evaluating Model
         Y_pred = ann.predict(X_test)
@@ -106,7 +108,7 @@ class ANN():
         json_file.close()
         ann = model_from_json(loaded_model_json)
         # load weights into new model
-        ann.load_weights("ann.h5")
+        ann.load_weights("ANN.h5")
         print("Loaded model from disk")
         input = pd.DataFrame(data=d)
         input = X_scaler.transform(input)

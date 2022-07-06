@@ -1,3 +1,4 @@
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -27,12 +28,12 @@ class SimpleLinearRegression:
             1))
         print("**************************")
         print(f"R squared = {r2_score(y_test, y_pred)}")
-        filename = "linear_regression_model.sav"
+        filename = 'linear_regression_model.sav'
         pickle.dump(regressor, open(filename, 'wb'))
         return regressor
     @staticmethod
     def predict(position, velocity, angle, depth, width):
-        regressor = pickle.load(open('Random_forest_model.sav', 'rb'))
+        regressor = pickle.load(open('linear_regression_model.sav', 'rb'))
         resultant_force = regressor.predict([[position,
                                               velocity,
                                               angle,
