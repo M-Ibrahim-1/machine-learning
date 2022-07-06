@@ -1,13 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from Random_forest import RandomForest
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QLabel
 from linear_regression_model import SimpleLinearRegression
 from ann import ANN
 from pages.about import Ui_About
 from pages.wall import Ui_Wall
 from pages.position import Ui_Position
-from pages.width import Ui_width
+from pages.width import Ui_Width
 import math
 
 
@@ -24,11 +24,14 @@ class Ui_MainWindow(QtWidgets.QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(590, 400)
+        MainWindow.setMinimumSize(QtCore.QSize(590, 400))
+        MainWindow.setMaximumSize(QtCore.QSize(590, 400))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         #Button Proceed
         self.proceed = QtWidgets.QPushButton(self.centralwidget)
         self.proceed.setGeometry(QtCore.QRect(200, 300, 93, 28))
 
+        #Logo on Top of Mainwindow
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 0, 591, 171))
         self.label.setText("")
@@ -60,14 +63,10 @@ class Ui_MainWindow(QtWidgets.QWidget):
 
         self.menuSourceCode = QtWidgets.QMenu(self.menubar)
         self.menuSourceCode.setObjectName("menuSourceCode")
+        self.actionGit = QtWidgets.QAction(MainWindow)
+        self.actionGit.setObjectName("actionGit")
+        self.menuSourceCode.addAction(self.actionGit)
         self.menubar.addAction(self.menuSourceCode.menuAction())
-
-        self.menuContact_us = QtWidgets.QMenu(self.menubar)
-        self.menuContact_us.setObjectName("menuContact_us")
-        self.actionContact = QtWidgets.QAction(MainWindow)
-        self.actionContact.setObjectName("actionContact")
-        self.menuContact_us.addAction(self.actionContact)
-        self.menubar.addAction(self.menuContact_us.menuAction())
 
         self.menuAbout = QtWidgets.QMenu(self.menubar)
         self.menuAbout.setObjectName("menuAbout")
@@ -104,9 +103,6 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.actionAbout.setText(_translate("MainWindow", "About us"))
         self.actionAbout.triggered.connect(self.openAbout)
 
-        self.menuContact_us.setTitle(_translate("MainWindow", "Contact us"))
-        self.actionContact.setText(_translate("MainWindow", "Email"))
-
         self.menuInfo.setTitle(_translate("MainWindow", "Info"))
         self.actionWall.setText(_translate("MainWindow", "Velocity and Angle"))
         self.actionPosition.setText(_translate("MainWindow", "Position"))
@@ -117,6 +113,8 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.actionWidth.triggered.connect(self.openWidth)
 
         self.menuSourceCode.setTitle(_translate("MainWindow", "Source Code"))
+        self.actionGit.setText(_translate("MainWindow", "GitHub Respiratory"))
+        self.actionGit.triggered.connect(self.openUrl)
 
     def take_inputs(self):
         position, done1 = QtWidgets.QInputDialog.getInt(
@@ -172,7 +170,6 @@ class Ui_MainWindow(QtWidgets.QWidget):
             self.pop_err_parameter()
             self.proceed.adjustSize()
 
-
     def pop_resultant_force(self, result, position, velocity, angle, depth, width):
         msg = QMessageBox()
         msg.setWindowTitle("Result")
@@ -194,7 +191,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         msg.setIcon(QMessageBox.Critical)
         msg.setStandardButtons(QMessageBox.Retry | QMessageBox.Abort)
         msg.setDetailedText("Position must be between 1 and 39 \n"
-                            "Velocity must be between 12 and 15 Km\H \n"
+                            "Velocity must be between 12 and 15 Km\\h \n"
                             "Angle must be between 0 and 3 Degree \n"
                             "Depth must be between 0 and 4 mm \n"
                             "Width can only be 1, 2 or 3")
@@ -229,9 +226,15 @@ class Ui_MainWindow(QtWidgets.QWidget):
 
     def openWidth(self):
         self.window = QtWidgets.QDialog()
-        self.ui = Ui_width()
+        self.ui = Ui_Width()
         self.ui.setupUi(self.window)
         self.window.show()
+
+    def openUrl(self):
+        url = QtCore.QUrl('https://github.com/M-Ibrahim-1/machine-learning.git')
+        if not QtGui.QDesktopServices.openUrl(url):
+            QtGui.QMessageBox.warning(self, 'Open Url', 'Could not open url')
+
 
 
 if __name__ == "__main__":

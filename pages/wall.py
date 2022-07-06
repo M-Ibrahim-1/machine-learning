@@ -12,10 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Wall(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(640, 216)
-        self.label = QtWidgets.QLabel(Dialog)
+    def setupUi(self, wall):
+        wall.setObjectName("Dialog")
+        wall.resize(640, 216)
+        wall.setMinimumSize(QtCore.QSize(640, 220))
+        wall.setMaximumSize(QtCore.QSize(640, 220))
+        self.label = QtWidgets.QLabel(wall)
         self.label.setGeometry(QtCore.QRect(0, 0, 640, 220))
         self.label.setMinimumSize(QtCore.QSize(640, 220))
         self.label.setMaximumSize(QtCore.QSize(459, 220))
@@ -24,19 +26,19 @@ class Ui_Wall(object):
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(wall)
+        QtCore.QMetaObject.connectSlotsByName(wall)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, wall):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        wall.setWindowTitle(_translate("wall", "Dialog"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
+    wall = QtWidgets.QDialog()
     ui = Ui_Wall()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    ui.setupUi(wall)
+    wall.show()
     sys.exit(app.exec_())

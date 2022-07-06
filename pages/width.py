@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_width(object):
+class Ui_Width(object):
     def setupUi(self, width):
         width.setObjectName("width")
         width.resize(650, 380)
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     width = QtWidgets.QDialog()
-    ui = Ui_width()
+    ui = Ui_Width()
     ui.setupUi(width)
     width.show()
     sys.exit(app.exec_())
