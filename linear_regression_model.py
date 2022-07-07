@@ -6,12 +6,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 import pickle
 import matplotlib as plt
+from sklearn.utils import shuffle
 
 class SimpleLinearRegression:
     def train():
         dataset = pd.read_csv("dataset.csv")
         dataset['res-force'] = dataset['res-force'].apply(np.ceil)
         dataset.drop(['Unnamed: 0'], axis=1, inplace=True)
+        dataset = shuffle(dataset)
         print(dataset)
         x = dataset.iloc[:, :-1].values
         print(x)
@@ -27,7 +29,7 @@ class SimpleLinearRegression:
             (y_pred.reshape(len(y_pred), 1), y_test.reshape(len(y_test), 1)),
             1))
         print("**************************")
-        print(f"R squared = {r2_score(y_test, y_pred)}")
+        print(f"Rr2_score = {r2_score(y_test, y_pred)}")
         filename = 'linear_regression_model.sav'
         pickle.dump(regressor, open(filename, 'wb'))
         return regressor

@@ -6,8 +6,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 import pickle
+from sklearn.utils import shuffle
 
-no_of_trees = 100
+no_of_trees = 500
 
 
 class RandomForest:
@@ -15,6 +16,7 @@ class RandomForest:
         dataset = pd.read_csv("dataset.csv")
         dataset['res-force'] = dataset['res-force'].apply(np.ceil)
         dataset.drop(['Unnamed: 0'], axis=1, inplace=True)
+        dataset = shuffle(dataset)
         print(dataset)
         x = dataset.iloc[:, :-1].values
         print(x)
