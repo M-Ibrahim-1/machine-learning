@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>width</class>
- <widget class="QDialog" name="width">
+ <class>crash</class>
+ <widget class="QDialog" name="crash">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>380</height>
+    <width>495</width>
+    <height>338</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>650</width>
-    <height>380</height>
+    <width>495</width>
+    <height>338</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>650</width>
-    <height>380</height>
+    <width>495</width>
+    <height>338</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="crash_2">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>651</width>
-     <height>381</height>
+     <width>501</width>
+     <height>341</height>
     </rect>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>graphic/width.png</pixmap>
+    <pixmap>graphic/crash.gif</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>

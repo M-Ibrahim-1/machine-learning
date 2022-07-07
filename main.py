@@ -8,6 +8,7 @@ from pages.about import Ui_About
 from pages.wall import Ui_Wall
 from pages.position import Ui_Position
 from pages.width import Ui_Width
+from pages.crash import Ui_crash
 import math
 
 
@@ -68,6 +69,13 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.menuSourceCode.addAction(self.actionGit)
         self.menubar.addAction(self.menuSourceCode.menuAction())
 
+        self.menuExample = QtWidgets.QMenu(self.menubar)
+        self.menuExample.setObjectName("menuExample")
+        self.actionPreview = QtWidgets.QAction(MainWindow)
+        self.actionPreview.setObjectName("actionPreview")
+        self.menuExample.addAction(self.actionPreview)
+        self.menubar.addAction(self.menuExample.menuAction())
+
         self.menuAbout = QtWidgets.QMenu(self.menubar)
         self.menuAbout.setObjectName("menuAbout")
         self.actionAbout = QtWidgets.QAction(MainWindow)
@@ -107,10 +115,12 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.actionWall.setText(_translate("MainWindow", "Velocity and Angle"))
         self.actionPosition.setText(_translate("MainWindow", "Position"))
         self.actionWidth.setText(_translate("MainWindow", "Width"))
-
+        self.menuExample.setTitle(_translate("MainWindow", "Example"))
+        self.actionPreview.setText(_translate("MainWindow", "Preview"))
         self.actionWall.triggered.connect(self.openWall)
         self.actionPosition.triggered.connect(self.openPosition)
         self.actionWidth.triggered.connect(self.openWidth)
+        self.actionPreview.triggered.connect(self.openCrash)
 
         self.menuSourceCode.setTitle(_translate("MainWindow", "Source Code"))
         self.actionGit.setText(_translate("MainWindow", "GitHub Respiratory"))
@@ -227,6 +237,12 @@ class Ui_MainWindow(QtWidgets.QWidget):
     def openWidth(self):
         self.window = QtWidgets.QDialog()
         self.ui = Ui_Width()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def openCrash(self):
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_crash()
         self.ui.setupUi(self.window)
         self.window.show()
 
